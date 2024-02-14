@@ -14,6 +14,7 @@ struct HomeView: View {
             ForEach(schools, id: \.dbn) { school in
                 NavigationLink {
                     DetailsView(school: school)
+                        .navigationTitle("DBN: " + school.dbn)
                 } label: {
                     Text(school.schoolName)
                         .font(.callout)

@@ -13,14 +13,32 @@ struct DetailsView: View {
     var body: some View {
         VStack {
             Section{
-                Text(school.overviewParagraph)
-                    .padding(.vertical, 20)
+                HStack{
+                    Text(school.overviewParagraph)
+                        .padding()
+                }
+                .padding(.vertical, 20)
+                .background(.thinMaterial)
+                .cornerRadius(10)
             } header: {
-                Text(school.schoolName)
-                    .padding(.vertical, 20)
+                HStack{
+                    Text(school.schoolName)
+                        .font(.title3)
+                        .padding(.vertical, 20)
+                }
+                .padding(.vertical, 20)
+                .frame(maxWidth: .infinity)
+                .background(.thinMaterial)
+                .cornerRadius(10)
             } footer: {
-                Text(school.location)
-                    .padding(.vertical, 20)
+                HStack {
+                    Text(school.location)
+                        .padding(.vertical, 20)
+                }
+                .padding(.vertical, 20)
+                .frame(maxWidth: .infinity)
+                .background(.thinMaterial)
+                .cornerRadius(10)
             }
             Spacer()
         }

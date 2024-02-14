@@ -9,16 +9,20 @@ import Foundation
 
 class SchoolsViewModel: ObservableObject {
     @Published var schools: [SchoolItem] = []
-//    @Published var names: [SchoolItem] = []
-//    @Published var schoolResponse: SchoolReponseItems?
+    @Published var isLoading: Bool = false
 
     //API Call
     func getSchools() async {
+        
         let urlSession = URLSession(configuration: .default)
         let urlStr: String = "https://data.cityofnewyork.us/resource/s3k6-pzi2.json"
         guard let url = URL(string: urlStr) else {return}
         let urlRequest = URLRequest(url: url)
         do {
+            await MainActor.run {
+                self.isLoading = true
+            }
+
             let (data, reponse) = try await urlSession.data(for: urlRequest)
             guard let httpResponse = reponse as? HTTPURLResponse else {
                 dump("reponse error")
@@ -31,9 +35,13 @@ class SchoolsViewModel: ObservableObject {
                 }
                 await MainActor.run {
                     self.schools = values
+                    self.isLoading = false
                 }
             }
         } catch {
+            await MainActor.run {
+                self.isLoading = false
+            }
             dump(error.localizedDescription)
         }
     }

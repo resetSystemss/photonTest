@@ -12,10 +12,16 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            HomeView(schools: viewModel.schools)
-                .task {
-                    await viewModel.getSchools()
+            ZStack {
+                HomeView(schools: viewModel.schools)
+                    .task {
+                        await viewModel.getSchools()
+                    }
+                    .navigationTitle("Schools")
+                if viewModel.isLoading {
+                    ProgressView()
                 }
+            }
         }
     }
 }
