@@ -15,11 +15,9 @@ struct DetailsView: View {
             Section{
                 Text(school.overviewParagraph)
                     .padding(.vertical, 20)
-                
             } header: {
                 Text(school.schoolName)
                     .padding(.vertical, 20)
-
             } footer: {
                 Text(school.location)
                     .padding(.vertical, 20)
